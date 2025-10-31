@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Sujan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@500&family=Allura&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5e9da;
+      transition: background 1s ease;
+    }
+
+    .page {
+      display: none;
+      height: 100vh;
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .active {
+      display: flex;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 48px;
+      color: #6b4226;
+      margin-bottom: 30px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .box {
+      border: 2px solid black;
+      border-radius: 12px;
+      padding: 25px;
+      width: 60%;
+      background: rgba(255, 255, 255, 0.9);
+      font-family: 'Allura', cursive;
+      font-size: 26px;
+      color: #2b1d10;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      animation: fadeInUp 2s ease-in-out;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 10px;
+      background-color: #b07b50;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #8c5d33;
+    }
+
+    .options {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 5;
+      padding-top: 100px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      width: 60%;
+      max-width: 500px;
+      border-radius: 10px;
+      animation: zoomIn 0.8s ease;
+    }
+
+    .close {
+      position: absolute;
+      top: 30px;
+      right: 50px;
+      color: white;
+      font-size: 40px;
+      cursor: pointer;
+    }
+
+    .cake {
+      width: 250px;
+      border-radius: 10px;
+      animation: gentleBounce 3s infinite ease-in-out;
+    }
+
+    /* Music Button on Page 1 */
+    #musicBtn {
+      position: absolute;
+      bottom: 30px;
+      background: #d4a574;
+      padding: 12px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes gentleBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- GLOBAL AUDIO -->
+  <audio id="globalSong" src="https://files.catbox.moe/q8ffkq.mp3" loop preload="auto"></audio>
+
+  <!-- PAGE 1 -->
+  <div class="page active" id="page1">
+    <h1>Happy 18th Birthday Sujan 🎂</h1>
+    <div class="box">
+      Wishing you a very happy birthday! 🎉  
+      May your year be filled with smiles, growth, and memories that make your heart happy.  
+      Always stay kind, smart, and a little crazy — that’s what makes you YOU! 💛
+    </div>
+    <button onclick="goToPage(2)">Next →</button>
+
+    <!-- Music Button -->
+    <button id="musicBtn" onclick="startMusic()">🎵 Tap to Play Music 🎵</button>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="page" id="page2" style="background-color: #f5e9da;">
+    <h1>A note for you</h1>
+    <div class="box">
+      So, ni bday kada.. Enjoy your day✨. Atleast ee year nundi konchem studies, health mida focus chey bagupadadham 😸.  
+      Inka... naatho godava padaku nenu kuda padakunda undataniki try chestha 😅. Be happy. There is lot more to achieve.  
+      Do hardwork and be responsible. Don't take things too lightly okayy!! I hope you will listen to my words but I know that you will never do that🥲.  
+      Anyways.. Happy birthday my friend💛
+    </div>
+
+    <div class="options">
+      <div>
+        <p><b>Want to see you??</b></p>
+        <button onclick="openModal('https://files.catbox.moe/bu3c21.jpg')">Click me</button>
+      </div>
+      <div>
+        <p><b>Want few flowers??</b></p>
+        <button onclick="openModal('https://files.catbox.moe/j7zj6t.jpg')">Click me</button>
+      </div>
+    </div>
+
+    <button onclick="goToPage(3)">Next →</button>
+  </div>
+
+  <!-- PAGE 3 -->
+  <div class="page" id="page3" style="background-color: #000; color: white; flex-direction: column;">
+    <canvas id="fireworks"></canvas>
+    <h1>Happy 18th Birthday Sujan 🎂</h1>
+    <img src="https://files.catbox.moe/r21kj8.jpg" alt="cake" class="cake" />
+  </div>
+
+  <!-- Modal -->
+  <div id="imgModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage" />
+  </div>
+
+  <script>
+    let currentPage = 1;
+    let musicStarted = false;
+
+    // Start music on user click
+    function startMusic() {
+      const song = document.getElementById('globalSong');
+      song.play().then(() => {
+        console.log("Music started!");
+        document.getElementById('musicBtn').style.display = 'none'; // Hide button
+        musicStarted = true;
+      }).catch(err => {
+        console.error("Play failed:", err);
+      });
+    }
+
+    // Page navigation
+    function goToPage(n) {
+      document.getElementById(`page${currentPage}`).classList.remove('active');
+      document.getElementById(`page${n}`).classList.add('active');
+      currentPage = n;
+    }
+
+    // Modal
+    function openModal(imgUrl) {
+      document.getElementById("imgModal").style.display = "block";
+      document.getElementById("modalImage").src = imgUrl;
+    }
+
+    function closeModal() {
+      document.getElementById("imgModal").style.display = "none";
+    }
+
+    // Fireworks
+    const canvas = document.getElementById('fireworks');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    function random(min, max) { return Math.random() * (max - min) + min; }
+
+    function createParticle() {
+      return {
+        x: random(0, canvas.width),
+        y: canvas.height,
+        radius: random(1, 3),
+        color: `hsl(${random(0, 360)}, 100%, 60%)`,
+        speedY: random(2, 5),
+        life: random(40, 100)
+      };
+    }
+
+    let particles = Array(80).fill().map(createParticle);
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+        p.y -= p.speedY;
+        p.life--;
+      });
+      particles = particles.filter(p => p.life > 0);
+      while (particles.length < 80) particles.push(createParticle());
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>
